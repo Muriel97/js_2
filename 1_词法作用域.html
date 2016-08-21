@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>1_词法作用域</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+	// function  f1() {
+	// 	var a=1;
+	// 	f2();                    //当f2函数在这里声明时，他访问对作用域：自身和全局 
+	// }
+	// function f2(){            //访问不到f1（）中的a
+	// 	return a;
+	// }
+	// document.write( f1() );    //error!!
+
+	//解决方案：
+	function f1(){
+		var a=1;
+		function f2(){    /*这样声明的话，f2（）就变成了f1的私有函数，外部无法调用*/
+			return a;    
+		}
+		return f2();
+	}
+	document.write( f1() ); 
+
+	解决方案2：
+	function f1(){
+		var a=1;
+	 return function(){    这样声明的话，f2就变成了匿名内部函数
+			return a;    
+		}();
+	}
+	document.write( f1() ); 
+</script>
+</body>
+</html>

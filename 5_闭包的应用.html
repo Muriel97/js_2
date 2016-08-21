@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5_闭包的应用</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+	var arr=["apple","pear","banana"];
+	var innerArray=new Array();
+
+
+
+    //错误：
+	// for (var i = 0; i < arr.length; i++) {
+	//     var item=arr[i];
+	//     innerArray[i]=function() {
+	//     	document.write(item+"<br>");     //输出：banana  banana  banana
+	//     }
+	// }
+
+	//解决方式一：外部函数／函数广场
+	// function write( item ){
+	// 	return function(){
+	// 		document.write( item+"<br>" );
+	// 	}
+	// }
+	// for (var i = 0; i < arr.length; i++) {
+	// 	var item=arr[i];
+	// 	innerArray[i]=write(item);
+	// };
+
+
+	//解决方案二:使用自调用的匿名函数
+	for (var i = 0; i < arr.length; i++) {
+		var item=arr[i];
+		innerArray[i]=( function ( item ){
+		    return function() {
+			    document.write( item+"<br>" );
+		    };
+		} )(item);
+	};
+
+
+
+
+
+    for (var i = 0; i < innerArray.length; i++) {
+    	innerArray[i]();
+    }
+
+</script>
+</body>
+</html>

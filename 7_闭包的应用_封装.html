@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7_闭包的应用_封装</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+    var ycarray=(function  () {
+    	var array=[];
+    	return {
+    		add:function(item){
+    			array[array.length]=item;
+    		},
+    		size:function(){
+    			return array.length;
+    		},
+    		clear:function(){
+    			array=[];
+    		},
+    		get:function(){
+    			return array;
+    		}
+    	}
+    })();
+
+
+
+    ycarray.add('b');
+    ycarray.add('a');
+    var result=ycarray.get();
+    for (var i = 0; i < result.length; i++) {
+    	document.write( result[i]+"<br>" ) 
+    }
+    document.write( ycarray.size()+"<br>" );
+    ycarray.clear();
+    document.write(ycarray.size());
+    
+</script>
+</body>
+</html>

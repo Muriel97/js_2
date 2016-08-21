@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>3_闭包对应用bug_保存现场</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<p>第一行</p>
+<p>第二行</p>
+<p>第三行</p>
+ <script type="text/javascript">
+    //错误：
+ 	// function  addHandler( nodes ) {
+ 	// 	for (var i = 0; i < nodes.length; i++) {
+ 	// 		var node=nodes[i];
+ 	// 		node.onclick=function(){
+ 	// 			alert(i);
+ 	// 		}
+ 	// 	}
+ 	// }
+
+ 	//解决方案一：
+ 	function addHandler( nodes ){
+ 		function invoke( i ){
+ 			return function(){
+ 				alert( i+1 );
+ 			}
+ 		}
+ 		for (var i = 0; i < nodes.length; i++) {
+ 			var node=nodes[i];
+ 			nodes.onclick=invoke(i);
+ 		};
+ 	}
+
+
+
+ 	var nodes=document.getElementByTagName("p");
+ 	addHandler( nodes );
+ </script>
+</body>
+</html>

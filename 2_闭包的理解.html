@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2_闭包的理解</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+	function f1() {
+		var a=1;
+		return function(){      //闭包：突破变量生命周期，运行完不会释放内存
+			return a;
+		}
+	}                      
+
+	var r=f1();
+	document.write( r() );       //1
+
+
+
+	function greet( name ){
+		return function(greeting){
+			return greeting+"  "+name;
+		}
+	}
+	var n="smith";
+	var r=greet(n);
+	document.write( r("hello") );
+
+	function greet( name ){
+		return function(greeting){
+			return greeting+"  "+name;
+		}
+	}
+
+	var n="smith";
+	var r=greet(n);
+	n="tom";            //不保存值，只保存变量
+	r=greet(n);
+	document.write( r("hello") );
+</script>
+</body>
+</html>
